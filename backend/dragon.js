@@ -19,6 +19,7 @@ const DEFAULT_PROPRETIES = {
     return traits;
   },
 };
+
 class Dragon {
   constructor({ birthdate, nickname, traits } = {}) {
     this.birthdate = birthdate || DEFAULT_PROPRETIES.birthdate;

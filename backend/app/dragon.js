@@ -2,6 +2,7 @@ const TRAITS = require('../data/traits.json');
 
 const DEFAULT_PROPRETIES = {
   nickname: 'unnamed',
+  generationId: undefined,
   get birthdate() {
     return new Date();
   },
@@ -21,10 +22,11 @@ const DEFAULT_PROPRETIES = {
 };
 
 class Dragon {
-  constructor({ birthdate, nickname, traits } = {}) {
+  constructor({ birthdate, nickname, traits, generationId } = {}) {
     this.birthdate = birthdate || DEFAULT_PROPRETIES.birthdate;
     this.nickname = nickname || DEFAULT_PROPRETIES.nickname;
     this.traits = traits || DEFAULT_PROPRETIES.randomTraits;
+    this.generationId = generationId || DEFAULT_PROPRETIES.generationId;
   }
 }
 module.exports = Dragon;

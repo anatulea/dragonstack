@@ -41,8 +41,8 @@ class DragonTable {
         [dragonId],
         (error, response) => {
           if (error) return reject(error);
-          if (response.rowCount.length === 0)
-            return reject(new Error('no dragon'));
+
+          if (response.rowCount.length === 0) return reject(new Error('no dragon'));
 
           resolve(response.rows[0]);
         }

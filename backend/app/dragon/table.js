@@ -32,5 +32,26 @@ class DragonTable {
       );
     });
   }
+  static getDragon({ dragonId }) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `SELECT birthdate, nickname, "generationId"
+              FROM dragon
+              WHERE dragon.id = $1`,
+        [dragonId],
+        (error, response) => {
+          if (error) return reject(error);
+
+          if (response.rowCount.length === 0) return reject(new Error('no dragon'));
+
+          resolve(response.rows[0]);
+        }
+      );
+    });
+  }
 }
+// to debugg  run on terminal ---->  node app/dragon/table.js
+// DragonTable.getDragon({ dragonId: 1 })
+//   .then(dragon => console.log(dragon))
+//   .catch(error => console.error('error', error));
 module.exports = DragonTable;

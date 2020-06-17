@@ -26,9 +26,9 @@ const getDragonWithTraits = ({ dragonId }) => {
   .catch(error => console.error(error));
 };
 //node app/dragon/helper.js
-getDragonWithTraits({ dragonId: 1 })
-  .then(dragon => console.log('dragon', dragon))
-  .catch(error => console.error('error', error));
+// getDragonWithTraits({ dragonId: 20 })
+//   .then(dragon => console.log('dragon', dragon))
+//   .catch(error => console.error('error', error));
 
 
 module.exports = { getDragonWithTraits };

@@ -1,14 +1,31 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
+const DEFAULT_GENERATION = { generationId: '', expiration: '' } 
 class Generation extends Component {
-    render(){
-        const generation = {generationId: 999, expiration:'2020-09-07'};
-        return (
-            <div>
-                <h3>Generation {generation.generationId}. Expires on:</h3>
+  state = { generation: DEFAULT_GENERATION  };
+
+  componentDidMount() {
+    this.fetchGeneration();
+  }
+
+  fetchGeneration = () => {
+    fetch('http://localhost:3000/generation')
+      .then(res => res.json())
+      .then(json => {
+        console.log(json, 'response');
+        this.setState({generation:json.generation})
+      })
+      .catch(error => console.error(error, 'error'));
+  };
+
+  render() {
+    const { generation } = this.state;
+    return (
+      <div>
+        <h3>Generation {generation.generationId}. Expires on:</h3>
         <h4>{new Date(generation.expiration).toString()}</h4>
-            </div>
-        )
-    }
+      </div>
+    );
+  }
 }
 export default Generation;

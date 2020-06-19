@@ -38,8 +38,8 @@ class Generation extends Component {
     const { generation } = this.state;
     return (
       <div>
-        <h1>Generation {generation.generationId}. Expires on:</h1>
-        <h2>{new Date(generation.expiration).toString()}</h2>
+        <h3>Generation {generation.generationId}. Expires on:</h3>
+        <h4>{new Date(generation.expiration).toString()}</h4>
       </div>
     );
   }

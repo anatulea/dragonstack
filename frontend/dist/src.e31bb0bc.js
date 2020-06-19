@@ -18525,7 +18525,7 @@ var Generation = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var generation = this.state.generation;
-      return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Generation ", generation.generationId, ". Expires on:"), _react.default.createElement("h2", null, new Date(generation.expiration).toString()));
+      return _react.default.createElement("div", null, _react.default.createElement("h3", null, "Generation ", generation.generationId, ". Expires on:"), _react.default.createElement("h4", null, new Date(generation.expiration).toString()));
     }
   }]);
 
@@ -38051,7 +38051,95 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./Accordion":"../node_modules/react-bootstrap/es/Accordion.js","./Alert":"../node_modules/react-bootstrap/es/Alert.js","./Badge":"../node_modules/react-bootstrap/es/Badge.js","./Breadcrumb":"../node_modules/react-bootstrap/es/Breadcrumb.js","./BreadcrumbItem":"../node_modules/react-bootstrap/es/BreadcrumbItem.js","./Button":"../node_modules/react-bootstrap/es/Button.js","./ButtonGroup":"../node_modules/react-bootstrap/es/ButtonGroup.js","./ButtonToolbar":"../node_modules/react-bootstrap/es/ButtonToolbar.js","./Carousel":"../node_modules/react-bootstrap/es/Carousel.js","./CarouselItem":"../node_modules/react-bootstrap/es/CarouselItem.js","./Checkbox":"../node_modules/react-bootstrap/es/Checkbox.js","./Clearfix":"../node_modules/react-bootstrap/es/Clearfix.js","./CloseButton":"../node_modules/react-bootstrap/es/CloseButton.js","./ControlLabel":"../node_modules/react-bootstrap/es/ControlLabel.js","./Col":"../node_modules/react-bootstrap/es/Col.js","./Collapse":"../node_modules/react-bootstrap/es/Collapse.js","./Dropdown":"../node_modules/react-bootstrap/es/Dropdown.js","./DropdownButton":"../node_modules/react-bootstrap/es/DropdownButton.js","./Fade":"../node_modules/react-bootstrap/es/Fade.js","./Form":"../node_modules/react-bootstrap/es/Form.js","./FormControl":"../node_modules/react-bootstrap/es/FormControl.js","./FormGroup":"../node_modules/react-bootstrap/es/FormGroup.js","./Glyphicon":"../node_modules/react-bootstrap/es/Glyphicon.js","./Grid":"../node_modules/react-bootstrap/es/Grid.js","./HelpBlock":"../node_modules/react-bootstrap/es/HelpBlock.js","./Image":"../node_modules/react-bootstrap/es/Image.js","./InputGroup":"../node_modules/react-bootstrap/es/InputGroup.js","./Jumbotron":"../node_modules/react-bootstrap/es/Jumbotron.js","./Label":"../node_modules/react-bootstrap/es/Label.js","./ListGroup":"../node_modules/react-bootstrap/es/ListGroup.js","./ListGroupItem":"../node_modules/react-bootstrap/es/ListGroupItem.js","./Media":"../node_modules/react-bootstrap/es/Media.js","./MenuItem":"../node_modules/react-bootstrap/es/MenuItem.js","./Modal":"../node_modules/react-bootstrap/es/Modal.js","./ModalBody":"../node_modules/react-bootstrap/es/ModalBody.js","./ModalFooter":"../node_modules/react-bootstrap/es/ModalFooter.js","./ModalHeader":"../node_modules/react-bootstrap/es/ModalHeader.js","./ModalTitle":"../node_modules/react-bootstrap/es/ModalTitle.js","./Nav":"../node_modules/react-bootstrap/es/Nav.js","./Navbar":"../node_modules/react-bootstrap/es/Navbar.js","./NavbarBrand":"../node_modules/react-bootstrap/es/NavbarBrand.js","./NavDropdown":"../node_modules/react-bootstrap/es/NavDropdown.js","./NavItem":"../node_modules/react-bootstrap/es/NavItem.js","./Overlay":"../node_modules/react-bootstrap/es/Overlay.js","./OverlayTrigger":"../node_modules/react-bootstrap/es/OverlayTrigger.js","./PageHeader":"../node_modules/react-bootstrap/es/PageHeader.js","./PageItem":"../node_modules/react-bootstrap/es/PageItem.js","./Pager":"../node_modules/react-bootstrap/es/Pager.js","./Pagination":"../node_modules/react-bootstrap/es/Pagination.js","./Panel":"../node_modules/react-bootstrap/es/Panel.js","./PanelGroup":"../node_modules/react-bootstrap/es/PanelGroup.js","./Popover":"../node_modules/react-bootstrap/es/Popover.js","./ProgressBar":"../node_modules/react-bootstrap/es/ProgressBar.js","./Radio":"../node_modules/react-bootstrap/es/Radio.js","./ResponsiveEmbed":"../node_modules/react-bootstrap/es/ResponsiveEmbed.js","./Row":"../node_modules/react-bootstrap/es/Row.js","./SafeAnchor":"../node_modules/react-bootstrap/es/SafeAnchor.js","./SplitButton":"../node_modules/react-bootstrap/es/SplitButton.js","./Tab":"../node_modules/react-bootstrap/es/Tab.js","./TabContainer":"../node_modules/react-bootstrap/es/TabContainer.js","./TabContent":"../node_modules/react-bootstrap/es/TabContent.js","./Table":"../node_modules/react-bootstrap/es/Table.js","./TabPane":"../node_modules/react-bootstrap/es/TabPane.js","./Tabs":"../node_modules/react-bootstrap/es/Tabs.js","./Thumbnail":"../node_modules/react-bootstrap/es/Thumbnail.js","./ToggleButton":"../node_modules/react-bootstrap/es/ToggleButton.js","./ToggleButtonGroup":"../node_modules/react-bootstrap/es/ToggleButtonGroup.js","./Tooltip":"../node_modules/react-bootstrap/es/Tooltip.js","./Well":"../node_modules/react-bootstrap/es/Well.js","./utils":"../node_modules/react-bootstrap/es/utils/index.js"}],"components/DragonAvatar.js":[function(require,module,exports) {
+},{"./Accordion":"../node_modules/react-bootstrap/es/Accordion.js","./Alert":"../node_modules/react-bootstrap/es/Alert.js","./Badge":"../node_modules/react-bootstrap/es/Badge.js","./Breadcrumb":"../node_modules/react-bootstrap/es/Breadcrumb.js","./BreadcrumbItem":"../node_modules/react-bootstrap/es/BreadcrumbItem.js","./Button":"../node_modules/react-bootstrap/es/Button.js","./ButtonGroup":"../node_modules/react-bootstrap/es/ButtonGroup.js","./ButtonToolbar":"../node_modules/react-bootstrap/es/ButtonToolbar.js","./Carousel":"../node_modules/react-bootstrap/es/Carousel.js","./CarouselItem":"../node_modules/react-bootstrap/es/CarouselItem.js","./Checkbox":"../node_modules/react-bootstrap/es/Checkbox.js","./Clearfix":"../node_modules/react-bootstrap/es/Clearfix.js","./CloseButton":"../node_modules/react-bootstrap/es/CloseButton.js","./ControlLabel":"../node_modules/react-bootstrap/es/ControlLabel.js","./Col":"../node_modules/react-bootstrap/es/Col.js","./Collapse":"../node_modules/react-bootstrap/es/Collapse.js","./Dropdown":"../node_modules/react-bootstrap/es/Dropdown.js","./DropdownButton":"../node_modules/react-bootstrap/es/DropdownButton.js","./Fade":"../node_modules/react-bootstrap/es/Fade.js","./Form":"../node_modules/react-bootstrap/es/Form.js","./FormControl":"../node_modules/react-bootstrap/es/FormControl.js","./FormGroup":"../node_modules/react-bootstrap/es/FormGroup.js","./Glyphicon":"../node_modules/react-bootstrap/es/Glyphicon.js","./Grid":"../node_modules/react-bootstrap/es/Grid.js","./HelpBlock":"../node_modules/react-bootstrap/es/HelpBlock.js","./Image":"../node_modules/react-bootstrap/es/Image.js","./InputGroup":"../node_modules/react-bootstrap/es/InputGroup.js","./Jumbotron":"../node_modules/react-bootstrap/es/Jumbotron.js","./Label":"../node_modules/react-bootstrap/es/Label.js","./ListGroup":"../node_modules/react-bootstrap/es/ListGroup.js","./ListGroupItem":"../node_modules/react-bootstrap/es/ListGroupItem.js","./Media":"../node_modules/react-bootstrap/es/Media.js","./MenuItem":"../node_modules/react-bootstrap/es/MenuItem.js","./Modal":"../node_modules/react-bootstrap/es/Modal.js","./ModalBody":"../node_modules/react-bootstrap/es/ModalBody.js","./ModalFooter":"../node_modules/react-bootstrap/es/ModalFooter.js","./ModalHeader":"../node_modules/react-bootstrap/es/ModalHeader.js","./ModalTitle":"../node_modules/react-bootstrap/es/ModalTitle.js","./Nav":"../node_modules/react-bootstrap/es/Nav.js","./Navbar":"../node_modules/react-bootstrap/es/Navbar.js","./NavbarBrand":"../node_modules/react-bootstrap/es/NavbarBrand.js","./NavDropdown":"../node_modules/react-bootstrap/es/NavDropdown.js","./NavItem":"../node_modules/react-bootstrap/es/NavItem.js","./Overlay":"../node_modules/react-bootstrap/es/Overlay.js","./OverlayTrigger":"../node_modules/react-bootstrap/es/OverlayTrigger.js","./PageHeader":"../node_modules/react-bootstrap/es/PageHeader.js","./PageItem":"../node_modules/react-bootstrap/es/PageItem.js","./Pager":"../node_modules/react-bootstrap/es/Pager.js","./Pagination":"../node_modules/react-bootstrap/es/Pagination.js","./Panel":"../node_modules/react-bootstrap/es/Panel.js","./PanelGroup":"../node_modules/react-bootstrap/es/PanelGroup.js","./Popover":"../node_modules/react-bootstrap/es/Popover.js","./ProgressBar":"../node_modules/react-bootstrap/es/ProgressBar.js","./Radio":"../node_modules/react-bootstrap/es/Radio.js","./ResponsiveEmbed":"../node_modules/react-bootstrap/es/ResponsiveEmbed.js","./Row":"../node_modules/react-bootstrap/es/Row.js","./SafeAnchor":"../node_modules/react-bootstrap/es/SafeAnchor.js","./SplitButton":"../node_modules/react-bootstrap/es/SplitButton.js","./Tab":"../node_modules/react-bootstrap/es/Tab.js","./TabContainer":"../node_modules/react-bootstrap/es/TabContainer.js","./TabContent":"../node_modules/react-bootstrap/es/TabContent.js","./Table":"../node_modules/react-bootstrap/es/Table.js","./TabPane":"../node_modules/react-bootstrap/es/TabPane.js","./Tabs":"../node_modules/react-bootstrap/es/Tabs.js","./Thumbnail":"../node_modules/react-bootstrap/es/Thumbnail.js","./ToggleButton":"../node_modules/react-bootstrap/es/ToggleButton.js","./ToggleButtonGroup":"../node_modules/react-bootstrap/es/ToggleButtonGroup.js","./Tooltip":"../node_modules/react-bootstrap/es/Tooltip.js","./Well":"../node_modules/react-bootstrap/es/Well.js","./utils":"../node_modules/react-bootstrap/es/utils/index.js"}],"assets/skinny.png":[function(require,module,exports) {
+module.exports = "/skinny.49e804a3.png";
+},{}],"assets/slender.png":[function(require,module,exports) {
+module.exports = "/slender.a4ff3b5b.png";
+},{}],"assets/sporty.png":[function(require,module,exports) {
+module.exports = "/sporty.feb515fe.png";
+},{}],"assets/stocky.png":[function(require,module,exports) {
+module.exports = "/stocky.645b467c.png";
+},{}],"assets/patchy.png":[function(require,module,exports) {
+module.exports = "/patchy.595e53f8.png";
+},{}],"assets/plain.png":[function(require,module,exports) {
+module.exports = "/plain.850cdd25.png";
+},{}],"assets/spotted.png":[function(require,module,exports) {
+module.exports = "/spotted.14485863.png";
+},{}],"assets/striped.png":[function(require,module,exports) {
+module.exports = "/striped.38c50047.png";
+},{}],"assets/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "skinny", {
+  enumerable: true,
+  get: function () {
+    return _skinny.default;
+  }
+});
+Object.defineProperty(exports, "slender", {
+  enumerable: true,
+  get: function () {
+    return _slender.default;
+  }
+});
+Object.defineProperty(exports, "sporty", {
+  enumerable: true,
+  get: function () {
+    return _sporty.default;
+  }
+});
+Object.defineProperty(exports, "stocky", {
+  enumerable: true,
+  get: function () {
+    return _stocky.default;
+  }
+});
+Object.defineProperty(exports, "patchy", {
+  enumerable: true,
+  get: function () {
+    return _patchy.default;
+  }
+});
+Object.defineProperty(exports, "plain", {
+  enumerable: true,
+  get: function () {
+    return _plain.default;
+  }
+});
+Object.defineProperty(exports, "spotted", {
+  enumerable: true,
+  get: function () {
+    return _spotted.default;
+  }
+});
+Object.defineProperty(exports, "striped", {
+  enumerable: true,
+  get: function () {
+    return _striped.default;
+  }
+});
+
+var _skinny = _interopRequireDefault(require("./skinny.png"));
+
+var _slender = _interopRequireDefault(require("./slender.png"));
+
+var _sporty = _interopRequireDefault(require("./sporty.png"));
+
+var _stocky = _interopRequireDefault(require("./stocky.png"));
+
+var _patchy = _interopRequireDefault(require("./patchy.png"));
+
+var _plain = _interopRequireDefault(require("./plain.png"));
+
+var _spotted = _interopRequireDefault(require("./spotted.png"));
+
+var _striped = _interopRequireDefault(require("./striped.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./skinny.png":"assets/skinny.png","./slender.png":"assets/slender.png","./sporty.png":"assets/sporty.png","./stocky.png":"assets/stocky.png","./patchy.png":"assets/patchy.png","./plain.png":"assets/plain.png","./spotted.png":"assets/spotted.png","./striped.png":"assets/striped.png"}],"components/DragonAvatar.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38060,6 +38148,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _assets = require("../assets");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -38086,6 +38176,33 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var propertyMap = {
+  backgroundColor: {
+    black: '#0f0f0f',
+    white: '#fffafa',
+    green: '#10b03b',
+    blue: '#0fb0fa'
+  },
+  build: {
+    slender: _assets.slender,
+    stocky: _assets.stocky,
+    sporty: _assets.sporty,
+    skinny: _assets.skinny
+  },
+  pattern: {
+    plain: _assets.plain,
+    striped: _assets.striped,
+    spotted: _assets.spotted,
+    patchy: _assets.patchy
+  },
+  size: {
+    small: 100,
+    medium: 140,
+    large: 180,
+    enormus: 220
+  }
+};
 
 var DragonAvatar = /*#__PURE__*/function (_Component) {
   _inherits(DragonAvatar, _Component);
@@ -38116,7 +38233,7 @@ var DragonAvatar = /*#__PURE__*/function (_Component) {
 
 var _default = DragonAvatar;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/Dragon.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../assets":"assets/index.js"}],"components/Dragon.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38218,7 +38335,79 @@ var Dragon = /*#__PURE__*/function (_Component) {
 
 var _default = Dragon;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./DragonAvatar.js":"components/DragonAvatar.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./DragonAvatar.js":"components/DragonAvatar.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"index.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -38229,10 +38418,12 @@ var _Generation = _interopRequireDefault(require("./components/Generation"));
 
 var _Dragon = _interopRequireDefault(require("./components/Dragon"));
 
+require("./index.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDom.render)(_react.default.createElement("div", null, _react.default.createElement("h2", null, "Dragon Stack From React"), _react.default.createElement(_Dragon.default, null), _react.default.createElement(_Generation.default, null)), document.getElementById('root'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/Generation":"components/Generation.js","./components/Dragon":"components/Dragon.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+(0, _reactDom.render)(_react.default.createElement("div", null, _react.default.createElement("h2", null, "Dragon Stack "), _react.default.createElement(_Generation.default, null), _react.default.createElement(_Dragon.default, null)), document.getElementById('root'));
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/Generation":"components/Generation.js","./components/Dragon":"components/Dragon.js","./index.css":"index.css"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

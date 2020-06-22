@@ -38222,9 +38222,49 @@ var DragonAvatar = /*#__PURE__*/function (_Component) {
           dragonId = _this$props$dragon.dragonId,
           generationId = _this$props$dragon.generationId,
           traits = _this$props$dragon.traits;
+      if (!dragonId) return _react.default.createElement("div", null);
       return _react.default.createElement("div", null, _react.default.createElement("span", null, "G", generationId, " "), _react.default.createElement("span", null, "I", dragonId, " "), traits.map(function (trait) {
         return trait.traitValue;
-      }).join(','));
+      }).join(','), this.DragonImage);
+    }
+  }, {
+    key: "DragonImage",
+    get: function get() {
+      var dragonPropertyMap = {};
+      this.props.dragon.traits.forEach(function (trait) {
+        var traitType = trait.traitType,
+            traitValue = trait.traitValue;
+        dragonPropertyMap[traitType] = propertyMap[traitType][traitValue];
+      });
+      var backgroundColor = dragonPropertyMap.backgroundColor,
+          build = dragonPropertyMap.build,
+          pattern = dragonPropertyMap.pattern,
+          size = dragonPropertyMap.size;
+      var sizing = {
+        width: size,
+        height: size
+      };
+      return _react.default.createElement("div", {
+        className: "dragon-avatar-image-wrapper"
+      }, _react.default.createElement("div", {
+        className: "dragon-avatar-image-background",
+        style: {
+          sizing: sizing,
+          backgroundColor: backgroundColor
+        }
+      }), _react.default.createElement("img", {
+        src: pattern,
+        className: "dragon-avatar-image-pattern",
+        style: {
+          sizing: sizing
+        }
+      }), _react.default.createElement("img", {
+        src: build,
+        className: "dragon-avatar-image",
+        style: {
+          sizing: sizing
+        }
+      }));
     }
   }]);
 
@@ -38451,7 +38491,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59063" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55057" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

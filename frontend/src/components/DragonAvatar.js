@@ -23,7 +23,7 @@ const propertyMap = {
     small:100, 
     medium:140, 
     large:180, 
-    enormus:220
+    huge:220
    },
 };
 class DragonAvatar extends Component {
@@ -41,9 +41,9 @@ class DragonAvatar extends Component {
     const sizing = { width: size, height: size };
     return (
       <div className='dragon-avatar-image-wrapper'>
-        <div className='dragon-avatar-image-background' style={{ sizing, backgroundColor }}></div>
-        <img src={pattern} className='dragon-avatar-image-pattern' style={{ sizing }} />
-        <img src={build} className='dragon-avatar-image' style={{ sizing }} />
+        <div className='dragon-avatar-image-background' style={{ backgroundColor, ...sizing }}></div>
+        <img src={pattern} className='dragon-avatar-image-pattern' style={{ ...sizing }} />
+        <img src={build} className='dragon-avatar-image' style={{ ...sizing }} />
       </div>
     );
   }

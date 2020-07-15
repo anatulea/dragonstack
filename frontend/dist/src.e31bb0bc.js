@@ -40707,7 +40707,9 @@ var fetchDragon = function fetchDragon() {
     dispatch({
       type: _types.DRAGON.FETCH
     });
-    return fetch("".concat(_config.BACKEND.ADDRESS, "/dragon/new")).then(function (response) {
+    return fetch("".concat(_config.BACKEND.ADDRESS, "/dragon/new"), {
+      credentials: 'include'
+    }).then(function (response) {
       return response.json();
     }).then(function (json) {
       if (json.type === 'error') {
@@ -41551,7 +41553,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53201" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63836" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

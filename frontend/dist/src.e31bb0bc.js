@@ -21658,7 +21658,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DRAGON = exports.GENERATION = void 0;
+exports.ACCOUNT = exports.DRAGON = exports.GENERATION = void 0;
 var GENERATION = {
   FETCH: 'GENERATION_FETCH',
   FETCH_ERROR: 'GENERATION_FETCH_ERROR',
@@ -21671,6 +21671,14 @@ var DRAGON = {
   FETCH_SUCCESS: 'DRAGON_FETCH_SUCCESS'
 };
 exports.DRAGON = DRAGON;
+var ACCOUNT = {
+  FETCH: 'ACCOUNT_FETCH',
+  FETCH_ERROR: 'ACCOUNT_FETCH_ERROR',
+  FETCH_SUCCESS: 'ACCOUNT_FETCH_SUCCESS' // FETCH_LOGOUT_SUCCESS: 'ACCOUNT_FETCH_LOGOUT_SUCCESS',
+  // FETCH_AUTHENTICATED_SUCCESS: 'ACCOUNT_FETCH_AUTHENTICATED_SUCCESS',
+
+};
+exports.ACCOUNT = ACCOUNT;
 },{}],"config.js":[function(require,module,exports) {
 "use strict";
 
@@ -40869,7 +40877,78 @@ var Home = /*#__PURE__*/function (_Component) {
 
 var _default = Home;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./Generation":"components/Generation.js","./Dragon":"components/Dragon.js"}],"components/AuthForm.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Generation":"components/Generation.js","./Dragon":"components/Dragon.js"}],"actions/account.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.signup = exports.fetchFromAccount = void 0;
+
+var _types = require("./types");
+
+var _config = require("../config");
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var fetchFromAccount = function fetchFromAccount(_ref) {
+  var endpoint = _ref.endpoint,
+      options = _ref.options,
+      FETCH_TYPE = _ref.FETCH_TYPE,
+      ERROR_TYPE = _ref.ERROR_TYPE,
+      SUCCESS_TYPE = _ref.SUCCESS_TYPE;
+  return function (dispatch) {
+    dispatch({
+      type: FETCH_TYPE
+    });
+    return fetch("".concat(_config.BACKEND.ADDRESS, "/account/").concat(endpoint), options).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      if (json.type === 'error') {
+        dispatch({
+          type: ERROR_TYPE,
+          message: json.message
+        });
+      } else {
+        dispatch(_extends({
+          type: SUCCESS_TYPE
+        }, json));
+      }
+    }).catch(function (error) {
+      return dispatch({
+        type: ERROR_TYPE,
+        message: error.message
+      });
+    });
+  };
+};
+
+exports.fetchFromAccount = fetchFromAccount;
+
+var signup = function signup(_ref2) {
+  var username = _ref2.username,
+      password = _ref2.password;
+  return fetchFromAccount({
+    endpoint: 'signup',
+    options: {
+      method: 'POST',
+      body: JSON.stringify({
+        username: username,
+        password: password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    },
+    FETCH_TYPE: _types.ACCOUNT.FETCH,
+    ERROR_TYPE: _types.ACCOUNT.FETCH_ERROR,
+    SUCCESS_TYPE: _types.ACCOUNT.FETCH_SUCCESS
+  });
+};
+
+exports.signup = signup;
+},{"./types":"actions/types.js","../config":"config.js"}],"components/AuthForm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40879,7 +40958,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRedux = require("react-redux");
+
 var _reactBootstrap = require("react-bootstrap");
+
+var _account = require("../actions/account");
+
+var _fetchStates = _interopRequireDefault(require("../reducers/fetchStates"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -40983,14 +41070,30 @@ var AuthForm = /*#__PURE__*/function (_Component) {
         onClick: this.signup
       }, "Sign Up")), _react.default.createElement("br", null), this.Error);
     }
+  }, {
+    key: "Error",
+    get: function get() {
+      if (this.state.buttonClicked && this.props.account.status === _fetchStates.default.error) {
+        return _react.default.createElement("div", null, this.props.account.message);
+      }
+    }
   }]);
 
   return AuthForm;
 }(_react.Component);
 
-var _default = AuthForm;
+var _default = (0, _reactRedux.connect)(function (_ref) {
+  var account = _ref.account;
+  return {
+    account: account
+  };
+}, {
+  signup: _account.signup,
+  login: _account.login
+})(AuthForm);
+
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js"}],"components/Root.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","../actions/account":"actions/account.js","../reducers/fetchStates":"reducers/fetchStates.js"}],"components/Root.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40999,6 +41102,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _reactRedux = require("react-redux");
 
 var _Home = _interopRequireDefault(require("./Home"));
 
@@ -41046,16 +41151,22 @@ var Root = /*#__PURE__*/function (_Component) {
   _createClass(Root, [{
     key: "render",
     value: function render() {
-      return false ? _react.default.createElement(_Home.default, null) : _react.default.createElement(_AuthForm.default, null);
+      return this.props.account.loggedIn ? _react.default.createElement(_Home.default, null) : _react.default.createElement(_AuthForm.default, null);
     }
   }]);
 
   return Root;
 }(_react.Component);
 
-var _default = Root;
+var _default = (0, _reactRedux.connect)(function (_ref) {
+  var account = _ref.account;
+  return {
+    account: account
+  };
+}, null)(Root);
+
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./Home":"components/Home.js","./AuthForm":"components/AuthForm.js"}],"reducers/generation.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","./Home":"components/Home.js","./AuthForm":"components/AuthForm.js"}],"reducers/generation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41158,6 +41269,70 @@ var dragon = function dragon() {
 
 var _default = dragon;
 exports.default = _default;
+},{"../actions/types":"actions/types.js","./fetchStates":"reducers/fetchStates.js"}],"reducers/account.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _types = require("../actions/types");
+
+var _fetchStates = _interopRequireDefault(require("./fetchStates"));
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var DEFAULT_ACCOUNT = {
+  loggedIn: false
+};
+
+var account = function account() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_ACCOUNT;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _types.ACCOUNT.FETCH:
+      return _extends({}, state, {
+        status: _fetchStates.default.fetching
+      });
+
+    case _types.ACCOUNT.FETCH_ERROR:
+      return _extends({}, state, {
+        status: _fetchStates.default.error,
+        message: action.message
+      });
+
+    case _types.ACCOUNT.FETCH_SUCCESS:
+      return _extends({}, state, {
+        status: _fetchStates.default.success,
+        message: action.message,
+        loggedIn: true
+      });
+    // case ACCOUNT.FETCH_LOGOUT_SUCCESS:
+    //   return {
+    //     ...state,
+    //     status: fetchStates.success,
+    //     message: action.message,
+    //     loggedIn: false
+    //   };
+    // case ACCOUNT.FETCH_AUTHENTICATED_SUCCESS:
+    //   return {
+    //     ...state,
+    //     status: fetchStates.success,
+    //     message: action.message,
+    //     loggedIn: action.authenticated
+    //   };
+
+    default:
+      return state;
+  }
+};
+
+var _default = account;
+exports.default = _default;
 },{"../actions/types":"actions/types.js","./fetchStates":"reducers/fetchStates.js"}],"reducers/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -41172,15 +41347,18 @@ var _generation = _interopRequireDefault(require("./generation"));
 
 var _dragon = _interopRequireDefault(require("./dragon"));
 
+var _account = _interopRequireDefault(require("./account"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = (0, _redux.combineReducers)({
+  account: _account.default,
   generation: _generation.default,
   dragon: _dragon.default
 });
 
 exports.default = _default;
-},{"redux":"../node_modules/redux/es/redux.js","./generation":"reducers/generation.js","./dragon":"reducers/dragon.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"redux":"../node_modules/redux/es/redux.js","./generation":"reducers/generation.js","./dragon":"reducers/dragon.js","./account":"reducers/account.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -41305,7 +41483,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59824" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53201" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

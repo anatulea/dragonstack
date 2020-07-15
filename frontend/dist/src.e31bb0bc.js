@@ -40818,7 +40818,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logout = exports.signup = exports.fetchFromAccount = void 0;
+exports.login = exports.logout = exports.signup = exports.fetchFromAccount = void 0;
 
 var _types = require("./types");
 
@@ -40897,6 +40897,30 @@ var logout = function logout() {
 };
 
 exports.logout = logout;
+
+var login = function login(_ref3) {
+  var username = _ref3.username,
+      password = _ref3.password;
+  return fetchFromAccount({
+    endpoint: 'login',
+    options: {
+      method: 'POST',
+      body: JSON.stringify({
+        username: username,
+        password: password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    },
+    FETCH_TYPE: _types.ACCOUNT.FETCH,
+    ERROR_TYPE: _types.ACCOUNT.FETCH_ERROR,
+    SUCCESS_TYPE: _types.ACCOUNT.FETCH_SUCCESS
+  });
+};
+
+exports.login = login;
 },{"./types":"actions/types.js","../config":"config.js"}],"components/Home.js":[function(require,module,exports) {
 "use strict";
 

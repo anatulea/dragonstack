@@ -40879,6 +40879,8 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactBootstrap = require("react-bootstrap");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -40911,15 +40913,75 @@ var AuthForm = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(AuthForm);
 
   function AuthForm() {
+    var _this;
+
+    var _temp;
+
     _classCallCheck(this, AuthForm);
 
-    return _super.apply(this, arguments);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _possibleConstructorReturn(_this, (_temp = _this = _super.call.apply(_super, [this].concat(args)), _this.state = {
+      username: '',
+      password: '',
+      buttonClicked: false
+    }, _this.updateUsername = function (event) {
+      _this.setState({
+        username: event.target.value
+      });
+    }, _this.updatePassword = function (event) {
+      _this.setState({
+        password: event.target.value
+      });
+    }, _this.signup = function () {
+      _this.setState({
+        buttonClicked: true
+      });
+
+      var _this$state = _this.state,
+          username = _this$state.username,
+          password = _this$state.password;
+
+      _this.props.signup({
+        username: username,
+        password: password
+      });
+    }, _this.login = function () {
+      _this.setState({
+        buttonClicked: true
+      });
+
+      var _this$state2 = _this.state,
+          username = _this$state2.username,
+          password = _this$state2.password;
+
+      _this.props.login({
+        username: username,
+        password: password
+      });
+    }, _temp));
   }
 
   _createClass(AuthForm, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, "Auth form");
+      return _react.default.createElement("div", null, _react.default.createElement("h2", null, "Dragon Stack"), _react.default.createElement(_reactBootstrap.FormGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
+        type: "text",
+        value: this.state.username,
+        placeholder: "username",
+        onChange: this.updateUsername
+      })), _react.default.createElement(_reactBootstrap.FormGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
+        type: "password",
+        value: this.state.password,
+        placeholder: "password",
+        onChange: this.updatePassword
+      })), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.login
+      }, "Log In"), _react.default.createElement("span", null, " or "), _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.signup
+      }, "Sign Up")), _react.default.createElement("br", null), this.Error);
     }
   }]);
 
@@ -40928,7 +40990,7 @@ var AuthForm = /*#__PURE__*/function (_Component) {
 
 var _default = AuthForm;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/Root.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js"}],"components/Root.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

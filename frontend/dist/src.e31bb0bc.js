@@ -40284,8 +40284,8 @@ var ACCOUNT = {
   FETCH: 'ACCOUNT_FETCH',
   FETCH_ERROR: 'ACCOUNT_FETCH_ERROR',
   FETCH_SUCCESS: 'ACCOUNT_FETCH_SUCCESS',
-  FETCH_LOGOUT_SUCCESS: 'ACCOUNT_FETCH_LOGOUT_SUCCESS' // FETCH_AUTHENTICATED_SUCCESS: 'ACCOUNT_FETCH_AUTHENTICATED_SUCCESS',
-
+  FETCH_LOGOUT_SUCCESS: 'ACCOUNT_FETCH_LOGOUT_SUCCESS',
+  FETCH_AUTHENTICATED_SUCCESS: 'ACCOUNT_FETCH_AUTHENTICATED_SUCCESS'
 };
 exports.ACCOUNT = ACCOUNT;
 },{}],"config.js":[function(require,module,exports) {
@@ -40818,7 +40818,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.login = exports.logout = exports.signup = exports.fetchFromAccount = void 0;
+exports.fetchAuthenticated = exports.logout = exports.login = exports.signup = exports.fetchFromAccount = void 0;
 
 var _types = require("./types");
 
@@ -40884,20 +40884,6 @@ var signup = function signup(_ref2) {
 
 exports.signup = signup;
 
-var logout = function logout() {
-  return fetchFromAccount({
-    endpoint: 'logout',
-    options: {
-      credentials: 'include'
-    },
-    FETCH_TYPE: _types.ACCOUNT.FETCH,
-    ERROR_TYPE: _types.ACCOUNT.FETCH_ERROR,
-    SUCCESS_TYPE: _types.ACCOUNT.FETCH_LOGOUT_SUCCESS
-  });
-};
-
-exports.logout = logout;
-
 var login = function login(_ref3) {
   var username = _ref3.username,
       password = _ref3.password;
@@ -40921,6 +40907,34 @@ var login = function login(_ref3) {
 };
 
 exports.login = login;
+
+var logout = function logout() {
+  return fetchFromAccount({
+    endpoint: 'logout',
+    options: {
+      credentials: 'include'
+    },
+    FETCH_TYPE: _types.ACCOUNT.FETCH,
+    ERROR_TYPE: _types.ACCOUNT.FETCH_ERROR,
+    SUCCESS_TYPE: _types.ACCOUNT.FETCH_LOGOUT_SUCCESS
+  });
+};
+
+exports.logout = logout;
+
+var fetchAuthenticated = function fetchAuthenticated() {
+  return fetchFromAccount({
+    endpoint: 'authenticated',
+    options: {
+      credentials: 'include'
+    },
+    FETCH_TYPE: _types.ACCOUNT.FETCH,
+    ERROR_TYPE: _types.ACCOUNT.FETCH_ERROR,
+    SUCCESS_TYPE: _types.ACCOUNT.FETCH_AUTHENTICATED_SUCCESS
+  });
+};
+
+exports.fetchAuthenticated = fetchAuthenticated;
 },{"./types":"actions/types.js","../config":"config.js"}],"components/Home.js":[function(require,module,exports) {
 "use strict";
 
@@ -41497,15 +41511,19 @@ var _Root = _interopRequireDefault(require("./components/Root"));
 
 var _reducers = _interopRequireDefault(require("./reducers"));
 
+var _account = require("./actions/account");
+
 require("./index.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_reducers.default, (0, _redux.applyMiddleware)(_reduxThunk.default));
-(0, _reactDom.render)(_react.default.createElement(_reactRedux.Provider, {
-  store: store
-}, _react.default.createElement(_Root.default, null)), document.getElementById('root'));
-},{"react":"../node_modules/react/index.js","redux":"../node_modules/redux/es/redux.js","react-dom":"../node_modules/react-dom/index.js","redux-thunk":"../node_modules/redux-thunk/es/index.js","react-redux":"../node_modules/react-redux/es/index.js","./components/Root":"components/Root.js","./reducers":"reducers/index.js","./index.css":"index.css"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var store = (0, _redux.createStore)(_reducers.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), (0, _redux.applyMiddleware)(_reduxThunk.default));
+store.dispatch((0, _account.fetchAuthenticated)()).then(function () {
+  (0, _reactDom.render)(_react.default.createElement(_reactRedux.Provider, {
+    store: store
+  }, _react.default.createElement(_Root.default, null)), document.getElementById('root'));
+});
+},{"react":"../node_modules/react/index.js","redux":"../node_modules/redux/es/redux.js","react-dom":"../node_modules/react-dom/index.js","redux-thunk":"../node_modules/redux-thunk/es/index.js","react-redux":"../node_modules/react-redux/es/index.js","./components/Root":"components/Root.js","./reducers":"reducers/index.js","./actions/account":"actions/account.js","./index.css":"index.css"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

@@ -12,3 +12,4 @@ class Root extends Component {
 }
 
 export default connect(({ account }) => ({ account }), null)(Root);
+ 

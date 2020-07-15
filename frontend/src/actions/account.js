@@ -37,3 +37,12 @@ export const signup = ({ username, password }) => fetchFromAccount({
     ERROR_TYPE: ACCOUNT.FETCH_ERROR,
     SUCCESS_TYPE: ACCOUNT.FETCH_SUCCESS
   });
+
+  export const logout = () => fetchFromAccount({
+    endpoint: 'logout',
+    options: { credentials: 'include' },
+    FETCH_TYPE: ACCOUNT.FETCH,
+    ERROR_TYPE: ACCOUNT.FETCH_ERROR,
+    SUCCESS_TYPE: ACCOUNT.FETCH_LOGOUT_SUCCESS
+  });
+  

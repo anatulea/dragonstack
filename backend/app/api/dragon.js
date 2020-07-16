@@ -5,7 +5,6 @@ const { authenticatedAccount } = require('./helper');
 
 const router = new Router();
 
-
 router.get('/new', (req, res, next) => {
   let accountId, dragon;
 
@@ -28,4 +27,19 @@ router.get('/new', (req, res, next) => {
     .catch(error => next(error));
 });
 
+router.put('/update', (req, res, next) => {
+  const { dragonId, nickname, 
+    // isPublic, saleValue, sireValue 
+  } = req.body;
+
+  DragonTable.updateDragon({
+    dragonId,
+    nickname,
+    // isPublic,
+    // saleValue,
+    // sireValue,
+  })
+    .then(() => res.json({ message: 'successfully updated dragon' }))
+    .catch(error => next(error));
+});
 module.exports = router;

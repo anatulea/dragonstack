@@ -55038,6 +55038,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _DragonAvatar = _interopRequireDefault(require("./DragonAvatar"));
 
+var _reactBootstrap = require("react-bootstrap");
+
+var _config = require("../config");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -55072,17 +55076,79 @@ var AccountDragonRow = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(AccountDragonRow);
 
   function AccountDragonRow() {
+    var _this;
+
+    var _temp;
+
     _classCallCheck(this, AccountDragonRow);
 
-    return _super.apply(this, arguments);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _possibleConstructorReturn(_this, (_temp = _this = _super.call.apply(_super, [this].concat(args)), _this.state = {
+      nickname: _this.props.dragon.nickname,
+      edit: false
+    }, _this.updateNickname = function (event) {
+      _this.setState({
+        nickname: event.target.value
+      });
+    }, _this.toggleEdit = function () {
+      _this.setState({
+        edit: !_this.state.edit
+      });
+    }, _this.save = function () {
+      fetch("".concat(_config.BACKEND.ADDRESS, "/dragon/update"), {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          dragonId: _this.props.dragon.dragonId,
+          nickname: _this.state.nickname // isPublic: this.state.isPublic,
+          // saleValue: this.state.saleValue,
+          // sireValue: this.state.sireValue,
+
+        })
+      }).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        if (json.type === 'error') {
+          alert(json.message);
+        } else {
+          _this.toggleEdit();
+        }
+      }).catch(function (error) {
+        return alert(error.message);
+      });
+    }, _temp));
   }
 
   _createClass(AccountDragonRow, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement("div", null, this.props.dragon.nickname), _react.default.createElement(_DragonAvatar.default, {
+      return _react.default.createElement("div", null, _react.default.createElement("input", {
+        type: "text",
+        value: this.state.nickname,
+        onChange: this.updateNickname,
+        disabled: !this.state.edit
+      }), _react.default.createElement("br", null), _react.default.createElement(_DragonAvatar.default, {
         dragon: this.props.dragon
-      }));
+      }), this.state.edit ? this.SaveButton : this.EditButton);
+    }
+  }, {
+    key: "SaveButton",
+    get: function get() {
+      return _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.save
+      }, "Save");
+    }
+  }, {
+    key: "EditButton",
+    get: function get() {
+      return _react.default.createElement(_reactBootstrap.Button, {
+        onClick: this.toggleEdit
+      }, "Edit");
     }
   }]);
 
@@ -55091,7 +55157,7 @@ var AccountDragonRow = /*#__PURE__*/function (_Component) {
 
 var _default = AccountDragonRow;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./DragonAvatar":"components/DragonAvatar.js"}],"components/AccountDragons.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./DragonAvatar":"components/DragonAvatar.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","../config":"config.js"}],"components/AccountDragons.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

@@ -42,13 +42,40 @@ class DragonTable {
         (error, response) => {
           if (error) return reject(error);
 
-          if (response.rowCount.length === 0) return reject(new Error('no dragon'));
+          if (response.rowCount.length === 0)
+            return reject(new Error('no dragon'));
 
           resolve(response.rows[0]);
         }
       );
     });
   }
+  static updateDragon({ dragonId, nickname, 
+    // isPublic, saleValue, sireValue 
+  }) {
+    //const settingsMap = { nickname, isPublic, saleValue, sireValue };
+
+    // const validQueries = Object.entries(settingsMap).filter(
+    //   ([settingKey, settingValue]) => {
+    //     if (settingValue !== undefined) {
+          return new Promise((resolve, reject) => {
+            pool.query(
+              `UPDATE dragon SET nickname = $1 WHERE id = $2`,
+              // [settingValue, dragonId],
+              [nickname, dragonId],
+              (error, response) => {
+                if (error) return reject(error);
+
+                resolve();
+              }
+            );
+          });
+      //   }
+      // }
+    // );
+        }
+  //   return Promise.all(validQueries);
+  // }
 }
 // to debugg  run on terminal ---->  node app/dragon/table.js
 // DragonTable.getDragon({ dragonId: 1 })

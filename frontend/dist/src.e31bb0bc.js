@@ -40267,7 +40267,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ACCOUNT = exports.DRAGON = exports.GENERATION = void 0;
+exports.ACCOUNT_DRAGONS = exports.ACCOUNT = exports.DRAGON = exports.GENERATION = void 0;
 var GENERATION = {
   FETCH: 'GENERATION_FETCH',
   FETCH_ERROR: 'GENERATION_FETCH_ERROR',
@@ -40288,6 +40288,12 @@ var ACCOUNT = {
   FETCH_AUTHENTICATED_SUCCESS: 'ACCOUNT_FETCH_AUTHENTICATED_SUCCESS'
 };
 exports.ACCOUNT = ACCOUNT;
+var ACCOUNT_DRAGONS = {
+  FETCH: 'ACCOUNT_DRAGON_FETCH',
+  FETCH_ERROR: 'ACCOUNT_DRAGON_FETCH_ERROR',
+  FETCH_SUCCESS: 'ACCOUNT_DRAGON_FETCH_SUCCESS'
+};
+exports.ACCOUNT_DRAGONS = ACCOUNT_DRAGONS;
 },{}],"config.js":[function(require,module,exports) {
 "use strict";
 
@@ -41007,15 +41013,11 @@ var Home = /*#__PURE__*/function (_Component) {
   }]);
 
   return Home;
-}(_react.Component);
+}(_react.Component); // fetch('http://localhost:3000/account/dragons', {
+//   credentials:'include'
+// }).then(response => response.json())
+// .then(json=>console.log('account dragons', json))
 
-fetch('http://localhost:3000/account/dragons', {
-  credentials: 'include'
-}).then(function (response) {
-  return response.json();
-}).then(function (json) {
-  return console.log('account dragons', json);
-});
 
 var _default = (0, _reactRedux.connect)(null, {
   logout: _account.logout
@@ -41407,6 +41409,56 @@ var account = function account() {
 
 var _default = account;
 exports.default = _default;
+},{"../actions/types":"actions/types.js","./fetchStates":"reducers/fetchStates.js"}],"reducers/accountDragons.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _types = require("../actions/types");
+
+var _fetchStates = _interopRequireDefault(require("./fetchStates"));
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var DEFAULT_ACCOUNT_DRAGONS = {
+  dragons: []
+};
+
+var accountDragons = function accountDragons() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_ACCOUNT_DRAGONS;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _types.ACCOUNT_DRAGONS.FETCH:
+      return _extends({}, state, {
+        status: _fetchStates.default.fetching
+      });
+
+    case _types.ACCOUNT_DRAGONS.FETCH_ERROR:
+      return _extends({}, state, {
+        status: _fetchStates.default.error,
+        message: action.message
+      });
+
+    case _types.ACCOUNT_DRAGONS.FETCH_SUCCESS:
+      return _extends({}, state, {
+        status: _fetchStates.default.success,
+        message: action.message,
+        dragons: action.dragons
+      });
+
+    default:
+      return state;
+  }
+};
+
+var _default = accountDragons;
+exports.default = _default;
 },{"../actions/types":"actions/types.js","./fetchStates":"reducers/fetchStates.js"}],"reducers/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -41423,16 +41475,19 @@ var _dragon = _interopRequireDefault(require("./dragon"));
 
 var _account = _interopRequireDefault(require("./account"));
 
+var _accountDragons = _interopRequireDefault(require("./accountDragons"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = (0, _redux.combineReducers)({
   account: _account.default,
   generation: _generation.default,
-  dragon: _dragon.default
+  dragon: _dragon.default,
+  accountDragons: _accountDragons.default
 });
 
 exports.default = _default;
-},{"redux":"../node_modules/redux/es/redux.js","./generation":"reducers/generation.js","./dragon":"reducers/dragon.js","./account":"reducers/account.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"redux":"../node_modules/redux/es/redux.js","./generation":"reducers/generation.js","./dragon":"reducers/dragon.js","./account":"reducers/account.js","./accountDragons":"reducers/accountDragons.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {

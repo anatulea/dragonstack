@@ -3,13 +3,20 @@ const DragonTraitTable = require('../dragonTrait/table');
 
 class DragonTable {
   static storeDragon(dragon) {
-    const { birthdate, nickname, generationId } = dragon;
+    const {
+      birthdate,
+      nickname,
+      generationId,
+      isPublic,
+      saleValue,
+      sireValue,
+    } = dragon;
 
     return new Promise((resolve, reject) => {
       pool.query(
-        `INSERT INTO dragon(birthdate, nickname, "generationId" )
-                 VALUES($1, $2, $3) RETURNING id`,
-        [birthdate, nickname, generationId],
+        `INSERT INTO dragon(birthdate, nickname, "generationId", "isPublic", "saleValue", "sireValue")
+         VALUES($1, $2, $3, $4, $5, $6) RETURNING id`,
+        [birthdate, nickname, generationId, isPublic, saleValue, sireValue],
         (error, response) => {
           if (error) return reject(error);
 
@@ -26,43 +33,39 @@ class DragonTable {
           )
             .then(() => resolve({ dragonId }))
             .catch(error => reject(error));
-
-          resolve({ dragonId });
         }
       );
     });
   }
+
   static getDragon({ dragonId }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        `SELECT birthdate, nickname, "generationId"
-              FROM dragon
-              WHERE dragon.id = $1`,
+        `SELECT birthdate, nickname, "generationId", "isPublic", "saleValue", "sireValue", "sireValue"
+        FROM dragon
+        WHERE dragon.id = $1`,
         [dragonId],
         (error, response) => {
           if (error) return reject(error);
 
-          if (response.rowCount.length === 0)
-            return reject(new Error('no dragon'));
+          if (response.rows.length === 0) return reject(new Error('no dragon'));
 
           resolve(response.rows[0]);
         }
       );
     });
   }
-  static updateDragon({ dragonId, nickname, 
-    // isPublic, saleValue, sireValue 
-  }) {
-    //const settingsMap = { nickname, isPublic, saleValue, sireValue };
 
-    // const validQueries = Object.entries(settingsMap).filter(
-    //   ([settingKey, settingValue]) => {
-    //     if (settingValue !== undefined) {
+  static updateDragon({ dragonId, nickname, isPublic, saleValue, sireValue }) {
+    const settingsMap = { nickname, isPublic, saleValue, sireValue };
+
+    const validQueries = Object.entries(settingsMap).filter(
+      ([settingKey, settingValue]) => {
+        if (settingValue !== undefined) {
           return new Promise((resolve, reject) => {
             pool.query(
-              `UPDATE dragon SET nickname = $1 WHERE id = $2`,
-              // [settingValue, dragonId],
-              [nickname, dragonId],
+              `UPDATE dragon SET "${settingKey}" = $1 WHERE id = $2`,
+              [settingValue, dragonId],
               (error, response) => {
                 if (error) return reject(error);
 
@@ -70,15 +73,12 @@ class DragonTable {
               }
             );
           });
-      //   }
-      // }
-    // );
         }
-  //   return Promise.all(validQueries);
-  // }
+      }
+    );
+
+    return Promise.all(validQueries);
+  }
 }
-// to debugg  run on terminal ---->  node app/dragon/table.js
-// DragonTable.getDragon({ dragonId: 1 })
-//   .then(dragon => console.log(dragon))
-//   .catch(error => console.error('error', error));
+
 module.exports = DragonTable;

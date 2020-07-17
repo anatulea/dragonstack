@@ -4,6 +4,7 @@ import dragon from './dragon';
 import account from './account';
 import accountDragons from './accountDragons';
 import accountInfo from './accountInfo';
+import publicDragons from './publicDragons';
 
 export default combineReducers({
   account,
@@ -11,4 +12,5 @@ export default combineReducers({
   dragon,
   accountDragons,
   accountInfo,
+  publicDragons,
 });

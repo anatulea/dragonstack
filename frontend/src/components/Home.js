@@ -22,7 +22,7 @@ class Home extends Component {
         <hr />
         <Link to='/account-dragons'>Account Dragons</Link>
         <br />
-        {/* <Link to='/public-dragons'>Public Dragons</Link> */}
+        <Link to='/public-dragons'>Public Dragons</Link>
       </div>
     );
   }

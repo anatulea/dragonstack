@@ -55372,7 +55372,7 @@ var AccountDragonRow = /*#__PURE__*/function (_Component) {
         value: this.state.saleValue,
         onChange: this.updateSaleValue,
         className: "account-dragon-row-input"
-      })), ' ', _react.default.createElement("span", null, "Sare Value:", ' ', _react.default.createElement("input", {
+      })), ' ', _react.default.createElement("span", null, "Sire Value:", ' ', _react.default.createElement("input", {
         type: "number",
         disabled: !this.state.edit,
         value: this.state.sireValue,
@@ -55906,7 +55906,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63077" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49837" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -85,7 +85,7 @@ class AccountDragonRow extends Component {
             />
           </span>{' '}
           <span>
-            Sare Value:{' '}
+            Sire Value:{' '}
             <input
               type='number'
               disabled={!this.state.edit}

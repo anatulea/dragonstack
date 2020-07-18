@@ -54620,13 +54620,15 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactBootstrap = require("react-bootstrap");
-
-var _DragonAvatar = _interopRequireDefault(require("./DragonAvatar.js"));
-
 var _reactRedux = require("react-redux");
 
+var _reactBootstrap = require("react-bootstrap");
+
+var _DragonAvatar = _interopRequireDefault(require("./DragonAvatar"));
+
 var _dragon = require("../actions/dragon");
+
+var _fetchStates = _interopRequireDefault(require("../reducers/fetchStates"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54672,9 +54674,16 @@ var Dragon = /*#__PURE__*/function (_Component) {
     value: function render() {
       return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Button, {
         onClick: this.props.fetchDragon
-      }, "New Dragon"), _react.default.createElement(_DragonAvatar.default, {
-        dragon: this.props.dragon
-      }));
+      }, "New Dragon"), _react.default.createElement("br", null), this.DragonView);
+    }
+  }, {
+    key: "DragonView",
+    get: function get() {
+      var dragon = this.props.dragon;
+      if (dragon.status === _fetchStates.default.error) return _react.default.createElement("span", null, dragon.message);
+      return _react.default.createElement(_DragonAvatar.default, {
+        dragon: dragon
+      });
     }
   }]);
 
@@ -54691,7 +54700,7 @@ var _default = (0, _reactRedux.connect)(function (_ref) {
 })(Dragon);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./DragonAvatar.js":"components/DragonAvatar.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/dragon":"actions/dragon.js"}],"actions/account.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./DragonAvatar":"components/DragonAvatar.js","../actions/dragon":"actions/dragon.js","../reducers/fetchStates":"reducers/fetchStates.js"}],"actions/account.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
